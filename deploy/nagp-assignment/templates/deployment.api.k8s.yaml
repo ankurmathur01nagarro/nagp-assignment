@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-nagp-app-api
+  labels:
+    app: nagp-app-api
+    type: api
+    stack: nagp-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nagp-app-api
+      stack: nagp-app
+  template:
+    metadata:
+      labels:
+        app: nagp-app-api
+        type: api
+        stack: nagp-app
+    spec:
+      initContainers:
+        - name: nagp-api-migration
+          image: {{ .Values.images.apiMigration }}
+          env:
+            - name: ConnectionStrings__PostgresConnString
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-nagp
+                  key: POSTGRES_CONNECTIONSTRING
+      containers:
+        - name: nagp-api
+          image: {{ .Values.images.api }}
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: ConnectionStrings__PostgresConnString
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-nagp
+                  key: POSTGRES_CONNECTIONSTRING
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-nagp
+                  key: POSTGRES_PASSWORD
+          resources:
+            requests:
+              cpu: 250m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          volumeMounts:
+            - name: pgdata
+              mountPath: /var/lib/postgresql
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: pvc-postgres-data-volume

@@ -1,0 +1,7 @@
+postgres:
+  adminPassword: password
+  connectionString: "Host=nagp-app-postgres-0.postgres.nagp-assignment.svc.cluster.local;Database=moviedb;Username=postgres;Password=password"
+
+images:
+  api: "docker.io/ankurmathur01nagarro/nagp-api:v1.0.5"
+  apiMigration: "docker.io/ankurmathur01nagarro/nagp-api-migration:v1.0.5"
