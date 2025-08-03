@@ -21,7 +21,7 @@ spec:
     spec:
       initContainers:
         - name: nagp-api-migration
-          image: {{ .Values.images.apiMigration }}
+          image: {{ .Values.images.apiMigration }}:{{ .Values.imgVersion }}
           env:
             - name: ConnectionStrings__PostgresConnString
               valueFrom:
@@ -30,7 +30,7 @@ spec:
                   key: POSTGRES_CONNECTIONSTRING
       containers:
         - name: nagp-api
-          image: {{ .Values.images.api }}
+          image: {{ .Values.images.api }}:{{ .Values.imgVersion }}
           ports:
             - name: http
               containerPort: 8080
@@ -40,11 +40,6 @@ spec:
                 configMapKeyRef:
                   name: cm-nagp
                   key: POSTGRES_CONNECTIONSTRING
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                configMapKeyRef:
-                  name: cm-nagp
-                  key: POSTGRES_PASSWORD
           resources:
             requests:
               cpu: 250m
@@ -52,10 +47,3 @@ spec:
             limits:
               cpu: 500m
               memory: 1Gi
-          volumeMounts:
-            - name: pgdata
-              mountPath: /var/lib/postgresql
-      volumes:
-        - name: pgdata
-          persistentVolumeClaim:
-            claimName: pvc-postgres-data-volume

@@ -34,7 +34,15 @@ api.MapGet("/movie/{movieId}", async (int movieId, [FromServices] IMovieService 
 
 api.MapPost("/movie", async ([FromBody] Movie m, [FromServices] IMovieService movieService) =>
 {
-    var addedMovie = await movieService.AddMovieAsync(m);
+    Movie addedMovie;
+    if (m.Id > 0)
+    {
+        addedMovie = await movieService.UpdateMovieAsync(m);
+    }
+    else
+    {
+        addedMovie = await movieService.AddMovieAsync(m);
+    }
     return addedMovie.Id;
 })
 .WithName("AddMovie");

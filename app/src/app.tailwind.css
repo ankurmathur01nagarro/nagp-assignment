@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+/* Reusable component classes for movie app */
+.imdb-header {
+  @apply text-4xl font-bold mb-8 text-yellow-400 flex items-center gap-4;
+}
+.imdb-logo {
+  @apply h-10 w-auto min-w-[40px];
+}
+.movie-list {
+  @apply divide-y divide-gray-700 bg-gray-800 rounded-lg shadow mb-8 overflow-hidden;
+}
+.movie-list-item {
+  @apply py-4 px-6 transition flex items-center justify-between;
+}
+.movie-list-item:hover {
+  @apply bg-gray-700;
+}
+.imdb-btn {
+  @apply inline-block bg-yellow-400 text-gray-900 font-bold py-2 px-4 rounded shadow hover:bg-yellow-300 transition text-sm;
+}
+.imdb-table {
+  @apply w-full bg-gray-800 rounded-lg shadow text-gray-100;
+}
+.imdb-table th {
+  @apply bg-gray-700 text-yellow-400 font-semibold px-4 py-2 text-left;
+}
+.imdb-table td {
+  @apply px-4 py-2 border-b border-gray-700;
+}
+

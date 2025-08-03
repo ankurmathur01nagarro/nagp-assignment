@@ -12,9 +12,6 @@ public class Migrator
 
     public async Task Migrate()
     {
-        if (await this.movieDbContext.Database.EnsureCreatedAsync())
-        {
-            await this.movieDbContext.Database.MigrateAsync();
-        }
+        await this.movieDbContext.Database.MigrateAsync();
     }
 }

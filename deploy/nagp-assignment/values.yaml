@@ -1,7 +1,11 @@
+imgVersion: "v1.0.5"
 postgres:
   adminPassword: password
   connectionString: "Host=nagp-app-postgres-0.postgres.nagp-assignment.svc.cluster.local;Database=moviedb;Username=postgres;Password=password"
 
 images:
-  api: "docker.io/ankurmathur01nagarro/nagp-api:v1.0.5"
-  apiMigration: "docker.io/ankurmathur01nagarro/nagp-api-migration:v1.0.5"
+  api: "docker.io/ankurmathur01nagarro/nagp-api"
+  apiMigration: "docker.io/ankurmathur01nagarro/nagp-api-migration"
+  ui: "docker.io/ankurmathur01nagarro/nagp-app"
+
+apiBaseUrl: "http://nagp-app-api.nagp-assignment.svc.cluster.local"
