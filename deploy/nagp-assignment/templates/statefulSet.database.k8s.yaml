@@ -32,8 +32,8 @@ spec:
               value: /var/lib/postgresql/17/docker
             - name: POSTGRES_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: cm-nagp
+                secretKeyRef:
+                  name: secrets-nagp
                   key: POSTGRES_PASSWORD
           resources:
             requests:
