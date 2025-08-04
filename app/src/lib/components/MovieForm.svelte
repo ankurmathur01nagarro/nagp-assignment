@@ -5,13 +5,19 @@
     // Props for the MovieForm component
     type Props = {
         movie: ReturnType<typeof parseMovie>;
-        action: string;
+        action: (data: FormData) => Promise<void>;
     };
 
-    let { movie, action }: Props = $props();
+    let { movie = $bindable(), action }: Props = $props();
+
+    async function handleSubmit(event: Event) {
+        event.preventDefault();
+        const formData = new FormData(event.target as HTMLFormElement);
+        await action(formData);
+    }
 </script>
 
-<form class="imdb-form" {action} method="post">
+<form class="imdb-form" onsubmit={handleSubmit}>
     <input type="hidden" name="id" bind:value={movie.id} />
     <div class="flex flex-col mb-4">
         <label for="movieTitle">Movie Title:</label>
@@ -35,7 +41,7 @@
         <Rating rating={movie.rating} />
     </div>
     <div>
-        <button type="submit" class="imdb-btn text-sm">Submit</button>
-        <a href="/" role="button" class="imdb-btn text-sm"> Cancel </a>
+        <button type="submit" class="imdb-btn text-sm cursor-pointer">Submit</button>
+        <a href="/" role="button" class="imdb-btn text-sm cursor-pointer"> Cancel </a>
     </div>
 </form>

@@ -26,8 +26,11 @@ spec:
             - name: http
               containerPort: 3000
           env:
-            - name: API_BASE_URL
-              value: {{ .Values.apiBaseUrl }}
+            - name: PUBLIC_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-nagp
+                  key: API_BASE_URL
           resources:
             requests:
               cpu: 250m

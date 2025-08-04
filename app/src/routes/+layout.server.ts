@@ -1,4 +1,4 @@
-import { env } from "$env/dynamic/private";
+import { env } from "$env/dynamic/public";
 import { parseMovie, type Movie } from "$lib/models/movie";
 
 export async function load() {
@@ -12,7 +12,7 @@ export async function load() {
 }
 
 async function loadMovies() {
-    const response = await fetch(`${env.API_BASE_URL}/api/movies`);
+    const response = await fetch(`${env.PUBLIC_API_BASE_URL}/api/movies`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch movies');

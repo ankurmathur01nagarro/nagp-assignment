@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: cm-nagp
 data:
-  POSTGRES_PASSWORD: {{ .Values.postgres.adminPassword }}
-  POSTGRES_CONNECTIONSTRING: {{ .Values.postgres.connectionString }}
+  API_BASE_URL: {{ printf "http://nagp-app-api.%s.svc.cluster.local" .Release.Namespace | quote }}
