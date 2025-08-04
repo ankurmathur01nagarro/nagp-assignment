@@ -1,0 +1,26 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ingress-nagp-app
+  labels:
+    app: nagp-app
+    type: ingress
+    stack: nagp-app
+spec:
+  rules:
+    - http:
+        paths:
+          - path: '/'
+            pathType: Prefix
+            backend:
+              service:
+                name: nagp-app-ui
+                port:
+                  number: 80
+          - path: '/api'
+            pathType: Prefix
+            backend:
+              service:
+                name: nagp-app-api
+                port:
+                  number: 80

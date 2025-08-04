@@ -1,5 +1,5 @@
 @echo off
-set VERSION=v1.0.8
+set VERSION=v1.0.9
 wsl docker build -f ./api/Dockerfile.api -t ankurmathur01nagarro/nagp-api:%VERSION% ./api
 wsl docker push ankurmathur01nagarro/nagp-api:%VERSION%
 
