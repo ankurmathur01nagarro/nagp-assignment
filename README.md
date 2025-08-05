@@ -18,10 +18,14 @@ To deploy on kubernetes (Google Kubernetes Engine), i have created a helm chart 
    3. Headless Service
 2. Web API: Deployment with **2 pod replicas** and a ClusterIP service for interaction with the Ingress controller.
 3. Application UI: Deployment with **4 pod replicas** and a ClusterIP services for interaction with the Ingress controller.
-4. Ingress: Using a standard and default **External GKE Ingress**, using Fan-Out backend topology,
+4. Ingress: Using a standard nginx based Ingress Controller (**ingress-nginx**), using Fan-Out backend topology,
    1. Path (/): Redirect to the UI app service
    2. Path (/api): Redirect to the Web API
-5. **ConfigMaps** for storing connection strings
+   3. _*Some more routes for utility purposes_
+   
+   _The main reason to use ingress-nginx here is that the default GKE Ingress has some limitations around CORS and SPA like handling._
+5. **ConfigMaps** for storing API's base url for use in frontend application.
+6. **Secrets** for storing postgres password and connection string for dotnet webapi applications.
 
 ## Folder Structure
 The folder structure for this assignment code is as follows:

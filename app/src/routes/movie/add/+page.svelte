@@ -3,15 +3,13 @@
 	import { parseMovie, type Movie } from "$lib/models/movie";
 	import { fail } from "@sveltejs/kit";
 	import { goto } from "$app/navigation";
-    let movie = $state<Movie>({
+    let movie = $state(parseMovie({
 		name: '',
 		releaseDate: new Date().toISOString(),
 		rating: 1,
 		synopsis: '',
 		id: 0
-	});
-
-	let parsedMovie = $derived(parseMovie(movie));
+	}));
 
 	let addhandler = async (formData: FormData) => {
         const movie: Partial<Movie> = {
@@ -43,4 +41,4 @@
 	<img src="/imdb-logo.svg" alt="IMDB Logo" class="imdb-logo" />
 	Add New Movie
 </h1>
-<MovieForm bind:movie={parsedMovie} action={addhandler} />
+<MovieForm bind:movie={movie} action={addhandler} />
