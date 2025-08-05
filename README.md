@@ -17,4 +17,6 @@ Link to [Documentation](DOCUMENTATION.md)
 
 ## Video Recording
 
-[]()
+A Video recording showing the resources in action.
+
+[Video](./Assignment-Video-AnkurMathur.webm)
