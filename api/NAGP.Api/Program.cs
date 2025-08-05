@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NAGP.Api.Data.DataModels;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +12,8 @@ builder.RegisterServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+app.MapOpenApi();
+app.MapScalarApiReference();
 
 app.UseHttpsRedirection();
 

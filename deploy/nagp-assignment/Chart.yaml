@@ -4,3 +4,8 @@ description: NAGP 2025 Kubernetes Assignment by Ankur Mathur (ankur.mathur01@nag
 type: application
 version: 0.1.2
 appVersion: "1.0.0"
+
+dependencies:
+  - name: ingress-nginx
+    version: "4.13.0"
+    repository: https://kubernetes.github.io/ingress-nginx
